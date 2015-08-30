@@ -21,3 +21,7 @@ public function registerBundles()
     );
 }
 ```
+
+Configuration
+------------
+No configuration required.
