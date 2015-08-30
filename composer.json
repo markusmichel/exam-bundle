@@ -18,5 +18,5 @@
     "autoload": {
         "psr-4": { "MMichel\\ExamBundle\\": "" }
     },
-    "target-dir": "MMichel/ExamBundle",
+    "target-dir": "MMichel/ExamBundle"
 }
