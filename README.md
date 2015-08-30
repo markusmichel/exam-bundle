@@ -5,7 +5,7 @@ Installation
 Require the bundle in your composer.json file:
 
 ```
-$ composer require mmichel/exam-bundle --no-update
+$ composer require mmichel/exam-bundle
 ```
 
 Register the bundle:
