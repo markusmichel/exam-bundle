@@ -16,7 +16,7 @@ Register the bundle:
 public function registerBundles()
 {
     return array(
-        new MMichel\ExamBundle\ExamBundle(),
+        new MMichel\ExamBundle\MMichelExamBundle(),
         // ...
     );
 }
