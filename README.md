@@ -24,4 +24,10 @@ public function registerBundles()
 
 Configuration
 ------------
-No configuration required.
+## enable form themes
+```yml
+# app/config/config.yml
+twig:
+    form_themes:
+        - "MMichelExamBundle:Form:form_fields.html.twig"
+```
