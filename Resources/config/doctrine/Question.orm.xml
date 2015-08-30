@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="MMichel\ExamBundle\Entity\Question" inheritance-type="JOINED">
+        <discriminator-column name="discr" type="string" />
+        <discriminator-map>
+            <discriminator-mapping value="multiple_choice" class="MultipleChoiceQuestion"/>
+            <discriminator-mapping value="single_choice" class="SingleChoiceQuestion"/>
+        </discriminator-map>
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="text" type="string" column="text" length="255"/>
+        <field name="additionalText" type="text" column="additionalText" nullable="true" />
+        <many-to-one target-entity="Exam" field="exam" inversed-by="questions"></many-to-one>
+    </entity>
+</doctrine-mapping>

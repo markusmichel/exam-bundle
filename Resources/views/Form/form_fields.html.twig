@@ -1,0 +1,6 @@
+{% block readonly_widget %}
+    <div id="{{ id }}">
+        {{ value }}
+    </div>
+    <input type="hidden" value="{{ value }}" name="{{ full_name }}">
+{% endblock readonly_widget %}

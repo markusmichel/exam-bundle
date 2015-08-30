@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="MMichel\ExamBundle\Entity\SingleChoiceQuestion">
+        <!--<id name="id" type="integer" column="id">-->
+            <!--<generator strategy="AUTO"/>-->
+        <!--</id>-->
+        <!--<field name="text" type="string" column="text" length="255"/>-->
+        <!--<field name="additionalText" type="text" column="additionalText" nullable="true"/>-->
+        <one-to-one field="correctAnswer" target-entity="SingleChoiceAnswer">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-one>
+        <one-to-many target-entity="SingleChoiceAnswer" mapped-by="question" field="incorrectAnswers">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>

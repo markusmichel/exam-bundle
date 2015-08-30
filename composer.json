@@ -1,0 +1,21 @@
+{
+    "name": "mmichel/exam-bundle",
+    "description": "Base for creating and validating exam questions (Multiple Choice, Single Choice)",
+    "type": "symfony-bundle",
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/console": "2.7.*",
+        "doctrine/doctrine-bundle": "~1.4",
+        "jms/di-extra-bundle": "^1.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Markus Michel",
+            "email": "markus.michel.1988@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "MMichel\\ExamBundle\\": "" }
+    },
+}

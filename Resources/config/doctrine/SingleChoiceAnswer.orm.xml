@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="MMichel\ExamBundle\Entity\SingleChoiceAnswer">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="text" type="string" column="text" length="255"/>
+        <field name="isCorrect" type="boolean" column="isCorrect" nullable="true"/>
+        <many-to-one target-entity="SingleChoiceQuestion" field="question"></many-to-one>
+    </entity>
+</doctrine-mapping>
