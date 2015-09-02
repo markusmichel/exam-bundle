@@ -48,7 +48,7 @@ There are a couple of predefined classes which makes it easier to create exams/t
 
 
 ## User Forms (tests, exams)
-In order to autodetect the form type for your custom/extended Question Models, you have to define it as a service and tyg it with `form.question_type` and add the attribute `data_class` to it.
+There is a predefined FormType `ExamType`, which displays a collection of `MultipleChoice` and `SingleChoice` questions. If you want to display your own form types, you have to tag them with `form.question_type` and add the attribute `data_class` to it.
 
 ```xml
 <service id="mmichel.form.type.multiple_choice_question_type" class="MMichel\ExamBundle\Form\MultipleChoiceQuestionType">
@@ -56,3 +56,6 @@ In order to autodetect the form type for your custom/extended Question Models, y
     <tag name="form.question_type" data_class="MMichel\ExamBundle\Entity\MultipleChoiceQuestion" />
 </service>
 ```
+
+**Note:**
+*Currently, only the `buildForm` method of your custom form types will be used!*
