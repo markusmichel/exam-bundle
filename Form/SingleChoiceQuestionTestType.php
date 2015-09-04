@@ -44,6 +44,6 @@ class SingleChoiceQuestionTestType extends AbstractType
      */
     public function getName()
     {
-        return 'mmichel_exambundle_singlechoicequestion_test';
+        return 'mmichel_exambundle_single_choiceq_uestion_test';
     }
 }
