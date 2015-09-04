@@ -40,9 +40,9 @@ class LoadMultipleChoiceQuestionData implements FixtureInterface
         $answer3->setText("FC Bayern München");
         $answer3->setIsCorrect(true);
 
-        $question->setCorrectAnswer($answer1);
+        $question->setCorrectAnswer($answer3);
+        $question->addIncorrectAnswer($answer1);
         $question->addIncorrectAnswer($answer2);
-        $question->addIncorrectAnswer($answer3);
 
         $exam->addQuestion($question);
         $manager->persist($question);
