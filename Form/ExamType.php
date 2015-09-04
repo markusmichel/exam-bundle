@@ -2,6 +2,7 @@
 
 namespace MMichel\ExamBundle\Form;
 
+use MMichel\ExamBundle\Form\Type\PolymorphCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,8 +12,7 @@ class ExamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('questions', 'collection', array(
-                'type'          => 'mmichel_exambundle_question',
+            ->add('questions', 'polymorph_collection', array(
                 'allow_add'     => false,
                 'allow_delete'  => false,
             ))

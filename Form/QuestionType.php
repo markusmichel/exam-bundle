@@ -12,13 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuestionType extends AbstractType
 {
-
-    private $factory;
-
-    public function __construct(QuestionFormFactory $factory) {
-        $this->factory = $factory;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -36,16 +29,16 @@ class QuestionType extends AbstractType
             ))
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($builder, $options) {
-            /** @var Question $question */
-            $question = $event->getData();
-
-            $type = $this->factory->getFormForObject($question);
-
-            if($type !== null) {
-                $type->buildForm($builder, $options);
-            }
-        });
+//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($builder, $options) {
+//            /** @var Question $question */
+//            $question = $event->getData();
+//
+//            $type = $this->factory->getFormForObject($question);
+//
+//            if($type !== null) {
+//                $type->buildForm($builder, $options);
+//            }
+//        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

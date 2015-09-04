@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SingleChoiceQuestionTestType extends AbstractType
+class SingleChoiceQuestionTestType extends QuestionType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,6 +17,7 @@ class SingleChoiceQuestionTestType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
             $form = $event->getForm();
             /** @var SingleChoiceQuestionInterface $question */

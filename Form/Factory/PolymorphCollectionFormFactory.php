@@ -1,13 +1,13 @@
 <?php
 
-namespace MMichel\ExamBundle\Form;
+namespace MMichel\ExamBundle\Form\Factory;
 
 
-use MMichel\ExamBundle\Model\QuestionInterface;
+use MMichel\ExamBundle\Form\Factory\PolymorphCollectionFormFactoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 
-class QuestionFormFactory
+class PolymorphCollectionFormFactory implements PolymorphCollectionFormFactoryInterface
 {
 
     private $types;
@@ -27,10 +27,10 @@ class QuestionFormFactory
     }
 
     /**
-     * @param QuestionInterface $obj
+     * @param mixed $obj
      * @return AbstractType
      */
-    public function getFormForObject(QuestionInterface $obj) {
+    public function getFormForObject($obj) {
         $class = get_class($obj);
         return $this->getFormForClass($class);
     }

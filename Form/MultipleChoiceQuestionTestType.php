@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MultipleChoiceQuestionTestType extends AbstractType
+class MultipleChoiceQuestionTestType extends QuestionType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -20,6 +20,7 @@ class MultipleChoiceQuestionTestType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
             $form = $event->getForm();
             /** @var MultipleChoiceQuestionInterface $question */
