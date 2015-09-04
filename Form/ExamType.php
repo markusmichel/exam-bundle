@@ -12,7 +12,9 @@ class ExamType extends AbstractType
     {
         $builder
             ->add('questions', 'collection', array(
-                'type'  => new QuestionType(),
+                'type'          => 'mmichel_exambundle_question',
+                'allow_add'     => false,
+                'allow_delete'  => false,
             ))
         ;
     }
