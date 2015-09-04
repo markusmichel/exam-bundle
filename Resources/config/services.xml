@@ -4,13 +4,28 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <services>
-        <service id="m_michel_exam.example" class="MMichel\ExamBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+
+        <service id="mmichel.form.question_form_factory" class="MMichel\ExamBundle\Form\QuestionFormFactory">
         </service>
+
+        <!--<service id="mmichel.form.type.question_type" class="MMichel\ExamBundle\Form\QuestionType">-->
+        <service id="mmichel.form.type.question_type" class="MMichel\ExamBundle\Form\QuestionType">
+            <tag name="form.type" alias="mmichel_exambundle_question" />
+            <!--<factory service="mmichel.form.question_form_factory" method="getForm" />-->
+            <argument type="service" id="mmichel.form.question_form_factory" />
+        </service>
+
+        <service id="mmichel.form.type.multiple_choice_question_type" class="MMichel\ExamBundle\Form\MultipleChoiceQuestionTestType">
+            <tag name="form.type" />
+            <tag name="form.question_type" data_class="MMichel\ExamBundle\Entity\MultipleChoiceQuestion" />
+        </service>
+
+        <service id="mmichel.form.type.single_choice_question_type" class="MMichel\ExamBundle\Form\SingleChoiceQuestionTestType">
+            <tag name="form.type" />
+            <tag name="form.question_type" data_class="MMichel\ExamBundle\Entity\SingleChoiceQuestion" />
+        </service>
+
     </services>
-    -->
+
 </container>

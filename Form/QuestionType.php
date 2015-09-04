@@ -4,8 +4,6 @@ namespace MMichel\ExamBundle\Form;
 
 use MMichel\ExamBundle\Entity\Question;
 use MMichel\ExamBundle\Form\Type\ReadOnlyType;
-use MMichel\ExamBundle\Model\MultipleChoiceQuestionInterface;
-use MMichel\ExamBundle\Model\SingleChoiceQuestionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -14,6 +12,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuestionType extends AbstractType
 {
+
+    private $factory;
+
+    public function __construct(QuestionFormFactory $factory) {
+        $this->factory = $factory;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -30,16 +35,12 @@ class QuestionType extends AbstractType
                 'label'     => false,
             ))
         ;
+
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($builder, $options) {
             /** @var Question $question */
             $question = $event->getData();
 
-            $type = null;
-            if($question instanceof MultipleChoiceQuestionInterface) {
-                $type = new MultipleChoiceQuestionTestType();
-            } elseif($question instanceof SingleChoiceQuestionInterface) {
-                $type = new SingleChoiceQuestionTestType();
-            }
+            $type = $this->factory->getFormForObject($question);
 
             if($type !== null) {
                 $type->buildForm($builder, $options);
@@ -62,4 +63,5 @@ class QuestionType extends AbstractType
     {
         return 'mmichel_exambundle_question';
     }
+
 }

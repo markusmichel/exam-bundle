@@ -3,7 +3,6 @@
 namespace MMichel\ExamBundle\Form;
 
 use Doctrine\Common\Collections\Collection;
-use FOS\RestBundle\Form\Transformer\EntityToIdObjectTransformer;
 use MMichel\ExamBundle\Model\MultipleChoiceQuestionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
