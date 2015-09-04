@@ -16,22 +16,30 @@ class SingleChoiceAnswer implements SingleChoiceAnswerInterface
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $text;
+    protected $text;
 
     /**
      * @var boolean
      */
-    private $isCorrect;
+    protected $isCorrect;
 
     /**
      * @var SingleChoiceQuestionInterface
      */
-    private $question;
+    protected $question;
+
+    /**
+     * SingleChoiceAnswer constructor.
+     */
+    public function __construct()
+    {
+        $this->isCorrect = false;
+    }
 
     function __clone()
     {
@@ -92,7 +100,7 @@ class SingleChoiceAnswer implements SingleChoiceAnswerInterface
      *
      * @return self
      */
-    public function setQuestion(QuestionInterface $question)
+    public function setQuestion(QuestionInterface $question = null)
     {
         $this->question = $question;
 

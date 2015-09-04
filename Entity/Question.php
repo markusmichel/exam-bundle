@@ -111,7 +111,7 @@ class Question implements QuestionInterface
     /**
      * @param Exam $exam
      */
-    public function setExam(Exam $exam)
+    public function setExam(Exam $exam = null)
     {
         $this->exam = $exam;
     }
@@ -143,7 +143,7 @@ class Question implements QuestionInterface
      * @param \DateTime $answeredAt
      * @return self
      */
-    public function setAnsweredAt(\DateTime $answeredAt)
+    public function setAnsweredAt(\DateTime $answeredAt = null)
     {
         $this->answeredAt = $answeredAt;
 

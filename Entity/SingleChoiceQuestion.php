@@ -31,6 +31,11 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
     protected $incorrectAnswers;
 
     /**
+     * @var Collection
+     */
+    protected $actualAnswers;
+
+    /**
      * User selcted answer.
      *
      * @var SingleChoiceAnswerInterface
@@ -90,7 +95,7 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
      * @param AnswerInterface $answer
      * @return self
      */
-    public function setCorrectAnswer(AnswerInterface $answer)
+    public function setCorrectAnswer(AnswerInterface $answer = null)
     {
         $this->setAnsweredAt(new \DateTime());
         $this->correctAnswer = $answer;
@@ -131,6 +136,7 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
      */
     public function removeIncorrectAnswer(SingleChoiceAnswerInterface $answer)
     {
+        $answer->setQuestion(null);
         $this->incorrectAnswers->removeElement($answer);
     }
 

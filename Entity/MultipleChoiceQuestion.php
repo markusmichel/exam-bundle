@@ -33,6 +33,10 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
         $this->actualAnswers    = new ArrayCollection();
     }
 
+    /**
+     * Reset id.
+     * Remove all answers and add a clone for each answer again.
+     */
     function __clone()
     {
         $this->id = null;
@@ -84,6 +88,7 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
     public function removeAnswer(MultipleChoiceAnswer $answers)
     {
         $this->answers->removeElement($answers);
+        $answers->setQuestion(null);
 
         return $this;
     }
@@ -114,6 +119,7 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
     }
 
     public function removeActualAnswer(MultipleChoiceAnswer $answer) {
+        $answer->setQuestionForSelectedAnswer(null);
         $this->actualAnswers->removeElement($answer);
 
         return $this;

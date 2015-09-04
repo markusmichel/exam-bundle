@@ -2,6 +2,8 @@
 
 namespace MMichel\ExamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use MMichel\ExamBundle\Entity\Question;
 
@@ -16,7 +18,7 @@ class Exam
     private $id;
 
     /**
-     * @var Question
+     * @var Collection
      */
     private $questions;
 
@@ -31,7 +33,7 @@ class Exam
      */
     public function __construct()
     {
-        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     /**

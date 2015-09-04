@@ -4,6 +4,7 @@ namespace MMichel\ExamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MMichel\ExamBundle\Model\MultipleChoiceAnswerInterface;
+use MMichel\ExamBundle\Model\MultipleChoiceQuestionInterface;
 use MMichel\ExamBundle\Model\QuestionInterface;
 
 /**
@@ -14,27 +15,32 @@ class MultipleChoiceAnswer implements MultipleChoiceAnswerInterface
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $text;
+    protected $text;
 
     /**
      * @var boolean
      */
-    private $isCorrect;
+    protected $isCorrect;
 
     /**
      * @var MultipleChoiceQuestion
      */
-    private $question;
+    protected $question;
 
     /**
      * @var MultipleChoiceQuestion
      */
-    private $questionForSelectedAnswer;
+    protected $questionForSelectedAnswer;
+
+    function __construct()
+    {
+        $this->isCorrect = false;
+    }
 
     function __clone()
     {
@@ -110,8 +116,11 @@ class MultipleChoiceAnswer implements MultipleChoiceAnswerInterface
      */
     public function setQuestion(QuestionInterface $question = null)
     {
-        $this->question = $question;
+        if($question !== null && !$question instanceof MultipleChoiceQuestionInterface) {
+            throw new \InvalidArgumentException();
+        }
 
+        $this->question = $question;
         return $this;
     }
 
@@ -123,16 +132,6 @@ class MultipleChoiceAnswer implements MultipleChoiceAnswerInterface
     public function getQuestion()
     {
         return $this->question;
-    }
-
-    /**
-     * Returns true if this answer is/would be the correct answer or one of the correct answers.
-     *
-     * @return mixed
-     */
-    public function getIsCorrectAnswer()
-    {
-
     }
 
     /**
