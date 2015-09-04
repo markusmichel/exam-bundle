@@ -1,15 +1,16 @@
 <?php
 
-namespace MMichel\ExamBundle\Tests\Model;
+namespace MMichel\ExamBundle\Tests\Doctrine;
 
 
 use Doctrine\ORM\EntityManager;
-use MMichel\ExamBundle\Entity\SingleChoiceAnswer;
-use MMichel\ExamBundle\Entity\SingleChoiceQuestion;
+use MMichel\ExamBundle\Entity\MultipleChoiceAnswer;
+use MMichel\ExamBundle\Entity\MultipleChoiceQuestion;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class SingleChoiceQuestionTest extends KernelTestCase
+class MultipleChoiceQuestionTest extends KernelTestCase
 {
+
     /**
      * @var EntityManager
      */
@@ -23,26 +24,25 @@ class SingleChoiceQuestionTest extends KernelTestCase
     }
 
     public function testAddAnswer() {
-        $question = new SingleChoiceQuestion();
-        $this->assertEmpty($question->getCorrectAnswer());
-        $this->assertEmpty($question->getIncorrectAnswers());
-        $this->assertEquals(0, $question->getIncorrectAnswers()->count());
+        $question = new MultipleChoiceQuestion();
+        $this->assertEmpty($question->getAnswers());
+        $this->assertEquals(0, $question->getAnswers()->count());
 
-        $answer = new SingleChoiceAnswer();
-        $question->addIncorrectAnswer($answer);
+        $answer = new MultipleChoiceAnswer();
+        $question->addAnswer($answer);
 
-        $this->assertEquals(1, $question->getIncorrectAnswers()->count());
+        $this->assertEquals(1, $question->getAnswers()->count());
         $this->assertEquals($question, $answer->getQuestion());
-        $this->assertEquals($answer, $question->getIncorrectAnswers()->first());
+        $this->assertEquals($answer, $question->getAnswers()->first());
     }
 
     public function testSaveAndRemove() {
-        $question = new SingleChoiceQuestion();
+        $question = new MultipleChoiceQuestion();
         $question->setText("TEXT");
 
-        $answer = new SingleChoiceAnswer();
+        $answer = new MultipleChoiceAnswer();
         $answer->setText("ANSWER");
-        $question->addIncorrectAnswer($answer);
+        $question->addAnswer($answer);
 
         $this->em->persist($question);
         $this->em->flush();
