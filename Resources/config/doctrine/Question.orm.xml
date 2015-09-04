@@ -11,6 +11,8 @@
         </id>
         <field name="text" type="string" column="text" length="255"/>
         <field name="additionalText" type="text" column="additionalText" nullable="true" />
-        <many-to-one target-entity="Exam" field="exam" inversed-by="questions"></many-to-one>
+        <many-to-one target-entity="Exam" field="exam" inversed-by="questions">
+            <join-column name="exam_id" referenced-column-name="id" on-delete="SET NULL" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>

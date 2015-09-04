@@ -6,7 +6,11 @@
         </id>
         <field name="text" type="string" column="text" length="255"/>
         <field name="isCorrect" type="boolean" column="isCorrect" nullable="true"/>
-        <many-to-one target-entity="MultipleChoiceQuestion" field="question" inversed-by="answers"></many-to-one>
-        <many-to-one target-entity="MultipleChoiceQuestion" field="questionForSelectedAnswer" inversed-by="actualAnswers"></many-to-one>
+        <many-to-one target-entity="MultipleChoiceQuestion" field="question" inversed-by="answers">
+            <join-column on-delete="SET NULL" />
+        </many-to-one>
+        <many-to-one target-entity="MultipleChoiceQuestion" field="questionForSelectedAnswer" inversed-by="actualAnswers">
+            <join-column on-delete="SET NULL" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>
