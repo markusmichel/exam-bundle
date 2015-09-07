@@ -16,5 +16,11 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+
+        <many-to-one field="actualAnswer" target-entity="SingleChoiceAnswer">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

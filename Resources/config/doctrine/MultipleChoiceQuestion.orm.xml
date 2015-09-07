@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="MMichel\ExamBundle\Entity\MultipleChoiceQuestion">
-        <!--<id name="id" type="integer" column="id">-->
-            <!--<generator strategy="AUTO"/>-->
-        <!--</id>-->
-        <!--<field name="text" type="string" column="text" length="255"/>-->
-        <!--<field name="additionalText" type="text" column="additionalText" nullable="true" />-->
-        <one-to-many target-entity="MultipleChoiceAnswer" mapped-by="question" field="answers">
+
+        <many-to-many target-entity="MultipleChoiceAnswer" field="answers">
             <cascade>
                 <cascade-all/>
             </cascade>
-        </one-to-many>
-        <one-to-many target-entity="MultipleChoiceAnswer" mapped-by="questionForSelectedAnswer" field="actualAnswers">
+            <join-table name="multiplechoicequestion_possibleanswers">
+                <join-columns>
+                    <join-column name="question_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="answer_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <many-to-many target-entity="MultipleChoiceAnswer" field="actualAnswers">
             <cascade>
                 <cascade-all/>
             </cascade>
-        </one-to-many>
+            <join-table name="multiplechoicequestion_actualanswers">
+                <join-columns>
+                    <join-column name="question_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="answer_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
     </entity>
 </doctrine-mapping>
