@@ -3,7 +3,6 @@
 namespace MMichel\ExamBundle\Form;
 
 use MMichel\ExamBundle\Model\SingleChoiceQuestionInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -18,7 +17,7 @@ class SingleChoiceQuestionTestType extends QuestionType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
             $form = $event->getForm();
             /** @var SingleChoiceQuestionInterface $question */
             $question = $event->getData();
@@ -28,6 +27,7 @@ class SingleChoiceQuestionTestType extends QuestionType
                 'choices'   => $question->getAnswers(),
                 'multiple'  => false,
                 'expanded'  => true,
+                'data_class' => 'MMichel\ExamBundle\Entity\SingleChoiceAnswer',
             ));
         });
     }
