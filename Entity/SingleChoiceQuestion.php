@@ -49,23 +49,8 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
 
     function __clone()
     {
-        $this->id = null;
-
-        if($this->incorrectAnswers !== null) {
-            $answers = new ArrayCollection();
-            /** @var SingleChoiceAnswer $answer */
-            foreach($this->incorrectAnswers as $answer) {
-                $clonedAnswer = clone $answer;
-                $clonedAnswer->setQuestion($this);
-                $answers->add($clonedAnswer);
-            }
-
-            $this->incorrectAnswers = $answers;
-        }
-
-        if($this->correctAnswer !== null) {
-            $clonedAnswer = clone $this->correctAnswer;
-            $this->correctAnswer = $clonedAnswer;
+        if($this->id) {
+            $this->id = null;
         }
     }
 
@@ -122,7 +107,6 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
     public function addIncorrectAnswer(SingleChoiceAnswerInterface $answer)
     {
         $this->setAnsweredAt(new \DateTime());
-        $answer->setQuestion($this);
         $this->incorrectAnswers[] = $answer;
 
         return $this;
@@ -136,7 +120,6 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
      */
     public function removeIncorrectAnswer(SingleChoiceAnswerInterface $answer)
     {
-        $answer->setQuestion(null);
         $this->incorrectAnswers->removeElement($answer);
     }
 

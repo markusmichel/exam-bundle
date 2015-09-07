@@ -29,11 +29,6 @@ class SingleChoiceAnswer implements SingleChoiceAnswerInterface
     protected $isCorrect;
 
     /**
-     * @var SingleChoiceQuestionInterface
-     */
-    protected $question;
-
-    /**
      * SingleChoiceAnswer constructor.
      */
     public function __construct()
@@ -43,7 +38,9 @@ class SingleChoiceAnswer implements SingleChoiceAnswerInterface
 
     function __clone()
     {
-        $this->id = null;
+        if($this->id) {
+            $this->id = null;
+        }
     }
 
     function __toString()
@@ -81,30 +78,6 @@ class SingleChoiceAnswer implements SingleChoiceAnswerInterface
     public function setText($text)
     {
         $this->text = $text;
-    }
-
-    /**
-     * Gets the corresponding question.
-     *
-     * @return SingleChoiceQuestionInterface
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
-
-    /**
-     * Sets the corresponding question.
-     *
-     * @param QuestionInterface $question
-     *
-     * @return self
-     */
-    public function setQuestion(QuestionInterface $question = null)
-    {
-        $this->question = $question;
-
-        return $this;
     }
 
     /**

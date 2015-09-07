@@ -27,16 +27,6 @@ class MultipleChoiceAnswer implements MultipleChoiceAnswerInterface
      */
     protected $isCorrect;
 
-    /**
-     * @var MultipleChoiceQuestion
-     */
-    protected $question;
-
-    /**
-     * @var MultipleChoiceQuestion
-     */
-    protected $questionForSelectedAnswer;
-
     function __construct()
     {
         $this->isCorrect = false;
@@ -44,7 +34,9 @@ class MultipleChoiceAnswer implements MultipleChoiceAnswerInterface
 
     function __clone()
     {
-        $this->id = null;
+        if($this->id) {
+            $this->id = null;
+        }
     }
 
     function __toString()
@@ -107,48 +99,4 @@ class MultipleChoiceAnswer implements MultipleChoiceAnswerInterface
     {
         return $this->isCorrect;
     }
-
-    /**
-     * Set question
-     *
-     * @param QuestionInterface $question
-     * @return MultipleChoiceAnswer
-     */
-    public function setQuestion(QuestionInterface $question = null)
-    {
-        if($question !== null && !$question instanceof MultipleChoiceQuestionInterface) {
-            throw new \InvalidArgumentException();
-        }
-
-        $this->question = $question;
-        return $this;
-    }
-
-    /**
-     * Get question
-     *
-     * @return \MMichel\ExamBundle\Entity\MultipleChoiceQuestion 
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
-
-    /**
-     * @return MultipleChoiceQuestion
-     */
-    public function getQuestionForSelectedAnswer()
-    {
-        return $this->questionForSelectedAnswer;
-    }
-
-    /**
-     * @param MultipleChoiceQuestion $questionForSelectedAnswer
-     */
-    public function setQuestionForSelectedAnswer($questionForSelectedAnswer)
-    {
-        $this->questionForSelectedAnswer = $questionForSelectedAnswer;
-    }
-
-
 }

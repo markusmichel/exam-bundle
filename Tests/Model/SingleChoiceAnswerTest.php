@@ -39,15 +39,6 @@ class SingleChoiceAnswerTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete();
     }
 
-    public function testSetQuestion() {
-        $this->assertNull($this->answer->getQuestion());
-        $question = new SingleChoiceQuestion();
-        $this->answer->setQuestion($question);
-        $this->assertEquals($question, $this->answer->getQuestion());
-        $this->answer->setQuestion(null);
-        $this->assertNull($this->answer->getQuestion());
-    }
-
     public function testSetIsCorrect() {
         $this->assertFalse($this->answer->getIsCorrect());
         $this->answer->setIsCorrect(true);

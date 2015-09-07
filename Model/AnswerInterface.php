@@ -22,22 +22,6 @@ interface AnswerInterface
     public function setText($text);
 
     /**
-     * Gets the corresponding question.
-     *
-     * @return QuestionInterface
-     */
-    public function getQuestion();
-
-    /**
-     * Sets the corresponding question.
-     *
-     * @param QuestionInterface $question
-     *
-     * @return self
-     */
-    public function setQuestion(QuestionInterface $question);
-
-    /**
      * Returns true if this answer is/would be the correct answer or one of the correct answers.
      *
      * @return mixed

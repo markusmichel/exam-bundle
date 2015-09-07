@@ -45,7 +45,6 @@ class ExamTest extends KernelTestCase
         $this->assertNotNull($question->getId());
         $this->assertNotNull($answer->getId());
 
-        $answer->setQuestion(null);
         $question->setCorrectAnswer(null);
         $this->em->remove($answer);
         $this->em->flush();

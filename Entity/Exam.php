@@ -6,40 +6,68 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use MMichel\ExamBundle\Entity\Question;
+use MMichel\ExamBundle\Model\AbstractQuestionTemplate;
+use MMichel\ExamBundle\Model\QuestionInterface;
 
 /**
  * Exam
  */
-class Exam
+class Exam extends AbstractQuestionTemplate
 {
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Collection
      */
-    private $questions;
+    protected $questions;
 
     // @todo implement schema
-    private $started;
+    protected $started;
 
     // @todo implement schema
-    private $completed;
+    protected $completed;
 
     /**
      * Constructor
+     *
+     * @todo: Examen müssen vorgerfertigt sein können und können demnach nicht direkt beantwortet werden - sie müssen vorher erst geklont werden.
+     * Em muss also eine Property geben welche besagt, ob das Examen ein "Template" ist oder nicht.
+     * Alternativ gibt es zwei klassen z.B. "Exam" und "ExamTemplate". ExamTemplate könnte das Template im Konstruktor übergeben bekommen.
+     *
+     * @todo: Beim klonen die Antworten der Fragen zurücksetzen?
+     *
      */
     public function __construct()
     {
+        parent::__construct();
         $this->questions = new ArrayCollection();
+    }
+
+    function __clone()
+    {
+        if($this->id) {
+            parent::__clone();
+            $this->id = null;
+            $this->isTemplate = false;
+
+            if($this->questions !== null) {
+                $clonedQuestions = new ArrayCollection();
+                foreach($this->questions as $question) {
+                    $clonedQuestions->add(clone $question);
+                }
+
+                $this->questions = $clonedQuestions;
+            }
+        }
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -54,7 +82,6 @@ class Exam
      */
     public function addQuestion(Question $question)
     {
-        $question->setExam($this);
         $this->questions[] = $question;
 
         return $this;

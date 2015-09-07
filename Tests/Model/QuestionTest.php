@@ -43,19 +43,6 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($additionalText, $question->getAdditionalText());
     }
 
-    public function testExam() {
-        $exam = new Exam();
-        $question = $this->getQuestion();
-
-        $this->assertNull($question->getExam());
-
-        $exam->addQuestion($question);
-        $this->assertEquals($exam, $question->getExam());
-
-        $question->setExam(null);
-        $this->assertNull($question->getExam());
-    }
-
     public function testAnswers() {
         $question = $this->getQuestion();
         $this->assertTrue($question->getAnswers() instanceof Collection);

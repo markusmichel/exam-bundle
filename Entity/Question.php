@@ -27,11 +27,6 @@ class Question implements QuestionInterface
     protected $additionalText;
 
     /**
-     * @var Exam
-     */
-    protected $exam;
-
-    /**
      * The time at which the user answered this question.
      * Subtypes should automatically set this value when adding/setting an answer.
      *
@@ -98,22 +93,6 @@ class Question implements QuestionInterface
     public function getAdditionalText()
     {
         return $this->additionalText;
-    }
-
-    /**
-     * @return Exam
-     */
-    public function getExam()
-    {
-        return $this->exam;
-    }
-
-    /**
-     * @param Exam $exam
-     */
-    public function setExam(Exam $exam = null)
-    {
-        $this->exam = $exam;
     }
 
     /**

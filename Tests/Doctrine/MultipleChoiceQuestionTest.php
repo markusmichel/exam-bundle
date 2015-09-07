@@ -32,7 +32,6 @@ class MultipleChoiceQuestionTest extends KernelTestCase
         $question->addAnswer($answer);
 
         $this->assertEquals(1, $question->getAnswers()->count());
-        $this->assertEquals($question, $answer->getQuestion());
         $this->assertEquals($answer, $question->getAnswers()->first());
     }
 

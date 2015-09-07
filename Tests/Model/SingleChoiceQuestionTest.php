@@ -35,20 +35,8 @@ class SingleChoiceQuestionTest extends \PHPUnit_Framework_TestCase
         $id = $anserId = 1;
         $this->question->setId($id);
 
-        $answer = new TestSingleChoiceAnswer();
-        $answer->setId($id);
-        $this->question->setCorrectAnswer($answer);
-        $this->question->addIncorrectAnswer($answer);
-
-        $clonedQuestion = clone $this->question;
-
-        $this->assertNotNull($clonedQuestion->getCorrectAnswer());
-        $this->assertNotEquals($answer, $clonedQuestion->getCorrectAnswer());
-        $this->assertNull($clonedQuestion->getCorrectAnswer()->getId());
-
-        $this->assertNotNull($clonedQuestion->getIncorrectAnswers()->get(0));
-        $this->assertNotEquals($answer, $clonedQuestion->getIncorrectAnswers()->get(0));
-        $this->assertNull($clonedQuestion->getIncorrectAnswers()->get(0)->getId());
+        $cloned = clone $this->question;
+        $this->assertNull($cloned->getId());
     }
 
     public function testGetId() {
@@ -73,7 +61,6 @@ class SingleChoiceQuestionTest extends \PHPUnit_Framework_TestCase
         $this->question->removeIncorrectAnswer($this->answer);
 
         $this->assertEquals(0, $this->question->getIncorrectAnswers()->count());
-        $this->assertNull($this->answer->getQuestion());
     }
 
     public function testGetAnswers() {

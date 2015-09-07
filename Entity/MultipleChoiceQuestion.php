@@ -39,18 +39,8 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
      */
     function __clone()
     {
-        $this->id = null;
-
-        if($this->answers !== null) {
-            $answers = new ArrayCollection();
-            /** @var MultipleChoiceAnswer $answer */
-            foreach($this->answers as $answer) {
-                $clonedAnswer = clone $answer;
-                $clonedAnswer->setQuestion($this);
-                $answers->add($clonedAnswer);
-            }
-
-            $this->answers = $answers;
+        if($this->id) {
+            $this->id = null;
         }
     }
 
@@ -73,7 +63,6 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
     public function addAnswer(MultipleChoiceAnswer $answers)
     {
         $this->setAnsweredAt(new \DateTime());
-        $answers->setQuestion($this);
         $this->answers[] = $answers;
 
         return $this;
@@ -88,7 +77,6 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
     public function removeAnswer(MultipleChoiceAnswer $answers)
     {
         $this->answers->removeElement($answers);
-        $answers->setQuestion(null);
 
         return $this;
     }
@@ -112,14 +100,12 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
     }
 
     public function addActualAnswer(MultipleChoiceAnswer $answer) {
-        $answer->setQuestionForSelectedAnswer($this);
         $this->actualAnswers[] = $answer;
 
         return $this;
     }
 
     public function removeActualAnswer(MultipleChoiceAnswer $answer) {
-        $answer->setQuestionForSelectedAnswer(null);
         $this->actualAnswers->removeElement($answer);
 
         return $this;

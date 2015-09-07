@@ -9,6 +9,7 @@ use MMichel\ExamBundle\Entity\Question;
 use MMichel\ExamBundle\Entity\SingleChoiceQuestion;
 use MMichel\ExamBundle\Model\AnswerInterface;
 use MMichel\ExamBundle\Model\MultipleChoiceAnswerInterface;
+use MMichel\ExamBundle\Tests\TestMultipleChoiceAnswer;
 
 class MultipleChoiceAnswerTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +18,7 @@ class MultipleChoiceAnswerTest extends \PHPUnit_Framework_TestCase
     protected $answer;
 
     public function setUp() {
-        $this->answer = new MultipleChoiceAnswer();
+        $this->answer = new TestMultipleChoiceAnswer();
     }
 
     public function testInheritedTypes() {
@@ -26,7 +27,9 @@ class MultipleChoiceAnswerTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testClone() {
-        $this->markTestIncomplete();
+        $this->answer->setId(1);
+        $clone = clone $this->answer;
+        $this->assertNull($clone->getId());
     }
 
     public function testToString() {
@@ -50,22 +53,6 @@ class MultipleChoiceAnswerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->answer->getIsCorrect());
         $this->answer->setIsCorrect(true);
         $this->assertTrue($this->answer->getIsCorrect());
-    }
-
-    public function testSetQuestion() {
-        $question = new MultipleChoiceQuestion();
-
-        $this->assertNull($this->answer->getQuestion());
-        $this->answer->setQuestion($question);
-        $this->assertEquals($question, $this->answer->getQuestion());
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetInvalidQuestion() {
-        $question = new SingleChoiceQuestion();
-        $this->answer->setQuestion($question);
     }
 
     public function testSetCorrectAnswer() {

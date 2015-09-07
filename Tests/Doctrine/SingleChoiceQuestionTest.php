@@ -32,7 +32,6 @@ class SingleChoiceQuestionTest extends KernelTestCase
         $question->addIncorrectAnswer($answer);
 
         $this->assertEquals(1, $question->getIncorrectAnswers()->count());
-        $this->assertEquals($question, $answer->getQuestion());
         $this->assertEquals($answer, $question->getIncorrectAnswers()->first());
     }
 

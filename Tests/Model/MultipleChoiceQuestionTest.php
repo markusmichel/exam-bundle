@@ -28,8 +28,8 @@ class MultipleChoiceQuestionTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testClone() {
-        $questionId = $answerId = 1;
-        $questionText = $answerText = "Test Text";
+        $questionId = 1;
+        $questionText = "Test Text";
 
         $question = new TestMultipleChoiceQuestion();
         $question->setId($questionId);
@@ -37,20 +37,9 @@ class MultipleChoiceQuestionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($questionId, $question->getId());
         $this->assertEquals($questionText, $question->getText());
 
-        $answer = new TestMultipleChoiceAnswer();
-        $answer->setId($answerId);
-        $this->assertEquals($answerId, $answer->getId());
-
-        $question->addAnswer($answer);
-
         $clonedQuestion = clone $question;
-        $clonedAnswer = $clonedQuestion->getAnswers()->get(0);
         $this->assertNull($clonedQuestion->getId());
         $this->assertEquals($questionText, $clonedQuestion->getText());
-        $this->assertEquals(1, $question->getAnswers()->count());
-        $this->assertNull($clonedAnswer->getId());
-        $this->assertNotEquals($question, $clonedAnswer->getQuestion());
-        $this->assertEquals($clonedQuestion, $clonedAnswer->getQuestion());
     }
 
     public function testGetId() {
@@ -72,7 +61,6 @@ class MultipleChoiceQuestionTest extends \PHPUnit_Framework_TestCase
         $this->question->addAnswer($answer);
         $this->question->removeAnswer($answer);
         $this->assertEquals(0, $this->question->getAnswers()->count());
-        $this->assertNull($answer->getQuestion());
     }
 
     public function testGetActualAnswers() {
@@ -90,7 +78,6 @@ class MultipleChoiceQuestionTest extends \PHPUnit_Framework_TestCase
         $this->question->addActualAnswer($answer);
         $this->question->removeActualAnswer($answer);
         $this->assertEquals(0, $this->question->getActualAnswers()->count());
-        $this->assertNull($answer->getQuestionForSelectedAnswer());
     }
 
 }

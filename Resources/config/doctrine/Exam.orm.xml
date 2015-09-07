@@ -4,12 +4,20 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
+        <field name="isTemplate" column="is_template" type="boolean" nullable="true" />
 
-        <one-to-many target-entity="Question" mapped-by="exam" field="questions">
+        <many-to-many target-entity="Question" field="questions">
+            <join-table name="exam_questions">
+                <join-columns>
+                    <join-column name="exam_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="question_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
             <cascade>
-                <cascade-persist/>
-                <cascade-remove/>
+                <cascade-all/>
             </cascade>
-        </one-to-many>
+        </many-to-many>
     </entity>
 </doctrine-mapping>
