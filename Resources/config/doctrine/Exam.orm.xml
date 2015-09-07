@@ -6,7 +6,10 @@
         </id>
 
         <one-to-many target-entity="Question" mapped-by="exam" field="questions">
-
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
         </one-to-many>
     </entity>
 </doctrine-mapping>
