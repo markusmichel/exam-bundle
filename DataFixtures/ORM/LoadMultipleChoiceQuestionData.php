@@ -48,9 +48,9 @@ class LoadMultipleChoiceQuestionData implements FixtureInterface
         $manager->persist($question);
 
 
-        $question = new MultipleChoiceQuestion();
-        $question->setText("Another sample multiple choice question");
-        $question->setAdditionalText("Which players are from Germany?");
+        $question2 = new MultipleChoiceQuestion();
+        $question2->setText("Another sample multiple choice question");
+        $question2->setAdditionalText("Which players are from Germany?");
 
         $answer1 = new MultipleChoiceAnswer();
         $answer1->setText("Franck Ribery");
@@ -68,16 +68,24 @@ class LoadMultipleChoiceQuestionData implements FixtureInterface
         $answer4->setText("Arjen Robben");
         $answer4->setIsCorrect(false);
 
-        $question->addAnswer($answer1);
-        $question->addAnswer($answer2);
-        $question->addAnswer($answer3);
-        $question->addAnswer($answer4);
+        $question2->addAnswer($answer1);
+        $question2->addAnswer($answer2);
+        $question2->addAnswer($answer3);
+        $question2->addAnswer($answer4);
 
-        $exam->addQuestion($question);
-        $manager->persist($question);
+        $exam->addQuestion($question2);
+        $manager->persist($question2);
 
         $manager->persist($exam);
 
+        $manager->flush();
+
+
+
+        $exam2 = new Exam();
+        $exam2->addQuestion(clone $question);
+        $exam2->addQuestion(clone $question2);
+        $manager->persist($exam2);
         $manager->flush();
     }
 }
