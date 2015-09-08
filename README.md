@@ -63,8 +63,7 @@ There is a predefined FormType `ExamType`, which displays a collection of `Multi
 **Note:**
 *Currently, only the `buildForm` method of your custom form types will be used!*
 
-Example usage
-==========
+### Example usage
 ```php
 // AppBundle\Controller\ExampleExamController
 
@@ -111,3 +110,50 @@ __Gotchas:__
 - Downside is that there will be new database rows for every answered questions!
 - If you extend or make your own models, be sure to override the `__clone` methods accordingly.
   Have a look at the [Predefined Classes](#predefined-classes).
+
+
+### Create a custom exam class
+If you want to create your own custom Exam class, you have the choice to either reference the questions directly or to use 
+a join entity (the predefined Exam class actually does this). If you want to include them directly, you can use the PolymorphCollectionType `polymorph_collection`
+to display `SingleChoiceQuestions` as well as `MultipleChoiceQuestions` in your (test) forms.
+
+E.g.:
+
+```php
+// your custom ExamFormType.php
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        ->add('questions', 'polymorph_collection', array(
+            'allow_add'     => false,
+            'allow_delete'  => false,
+        ))
+    ;
+}
+```
+
+If you decide to use a join entity, create a form type for that entity and use the `mmichel.form.question_form_factory` form factory
+to decide which form type to use for the individual question.
+
+E.g.:
+```php
+// your custom AnotherExamFormType.php
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        ->add('questions', 'collection', array(
+            'allow_add'     => false,
+            'allow_delete'  => false,
+            'type'          => 'exam_question_test',
+        ))
+    ;
+}
+```
+
+```xml
+<!-- services.xml -->
+<service id="mmichel.form.type.exam_question_test_type" class="MMichel\ExamBundle\Form\ExamQuestionTestType">
+    <tag name="form.type" alias="exam_question_test" />
+    <argument type="service" id="%mmichel.form.polymorph_collection_factory.class%" />
+</service>
+```
