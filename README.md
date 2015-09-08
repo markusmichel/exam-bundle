@@ -2,6 +2,7 @@
 
 Installation
 ------------
+
 Require the bundle in your composer.json file:
 
 ```
@@ -23,7 +24,8 @@ public function registerBundles()
 ```
 
 Configuration
-------------
+====================
+
 ## enable form themes
 ```yml
 # app/config/config.yml
@@ -33,7 +35,8 @@ twig:
 ```
 
 Usage
-------------
+====================
+
 ## Predefined classes
 There are a couple of predefined classes which makes it easier to create exams/tests containing simple right or wrong questions. Feel free to reuse and/or extend them.
 
@@ -61,7 +64,7 @@ There is a predefined FormType `ExamType`, which displays a collection of `Multi
 *Currently, only the `buildForm` method of your custom form types will be used!*
 
 Example usage
-================
+==========
 ```php
 // AppBundle\Controller\ExampleExamController
 
