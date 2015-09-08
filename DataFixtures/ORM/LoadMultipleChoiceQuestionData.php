@@ -24,68 +24,59 @@ class LoadMultipleChoiceQuestionData implements FixtureInterface
         $exam = new Exam();
 
 
-        $question = new SingleChoiceQuestion();
-        $question->setText("Sample multiple choice question");
-        $question->setAdditionalText("Which is the best team in the world?");
+        $singleChoiceQuestion = new SingleChoiceQuestion();
+        $singleChoiceQuestion->setText("Sample multiple choice question");
+        $singleChoiceQuestion->setAdditionalText("Which is the best team in the world?");
 
-        $answer1 = new SingleChoiceAnswer();
-        $answer1->setText("Borussia Dortmund");
-        $answer1->setIsCorrect(false);
+        $singleChoiceAnswer1 = new SingleChoiceAnswer();
+        $singleChoiceAnswer1->setText("Borussia Dortmund");
+        $singleChoiceAnswer1->setIsCorrect(false);
 
-        $answer2 = new SingleChoiceAnswer();
-        $answer2->setText("Real Madrid");
-        $answer2->setIsCorrect(false);
+        $singleChoiceAnswer2 = new SingleChoiceAnswer();
+        $singleChoiceAnswer2->setText("Real Madrid");
+        $singleChoiceAnswer2->setIsCorrect(false);
 
-        $answer3 = new SingleChoiceAnswer();
-        $answer3->setText("FC Bayern München");
-        $answer3->setIsCorrect(true);
+        $singleChoiceAnswer3 = new SingleChoiceAnswer();
+        $singleChoiceAnswer3->setText("FC Bayern München");
+        $singleChoiceAnswer3->setIsCorrect(true);
 
-        $question->setCorrectAnswer($answer3);
-        $question->addIncorrectAnswer($answer1);
-        $question->addIncorrectAnswer($answer2);
-
-        $exam->addQuestion($question);
-        $manager->persist($question);
+        $singleChoiceQuestion->setCorrectAnswer($singleChoiceAnswer3);
+        $singleChoiceQuestion->addIncorrectAnswer($singleChoiceAnswer1);
+        $singleChoiceQuestion->addIncorrectAnswer($singleChoiceAnswer2);
 
 
-        $question2 = new MultipleChoiceQuestion();
-        $question2->setText("Another sample multiple choice question");
-        $question2->setAdditionalText("Which players are from Germany?");
+        $multipleChoiceQuestion = new MultipleChoiceQuestion();
+        $multipleChoiceQuestion->setText("Another sample multiple choice question");
+        $multipleChoiceQuestion->setAdditionalText("Which players are from Germany?");
 
-        $answer1 = new MultipleChoiceAnswer();
-        $answer1->setText("Franck Ribery");
-        $answer1->setIsCorrect(false);
+        $multipleChoiceAnswer1 = new MultipleChoiceAnswer();
+        $multipleChoiceAnswer1->setText("Franck Ribery");
+        $multipleChoiceAnswer1->setIsCorrect(false);
 
-        $answer2 = new MultipleChoiceAnswer();
-        $answer2->setText("Thomas Müller");
-        $answer2->setIsCorrect(true);
+        $multipleChoiceAnswer2 = new MultipleChoiceAnswer();
+        $multipleChoiceAnswer2->setText("Thomas Müller");
+        $multipleChoiceAnswer2->setIsCorrect(true);
 
-        $answer3 = new MultipleChoiceAnswer();
-        $answer3->setText("Bastian Schweinsteiger");
-        $answer3->setIsCorrect(true);
+        $multipleChoiceAnswer3 = new MultipleChoiceAnswer();
+        $multipleChoiceAnswer3->setText("Bastian Schweinsteiger");
+        $multipleChoiceAnswer3->setIsCorrect(true);
 
-        $answer4 = new MultipleChoiceAnswer();
-        $answer4->setText("Arjen Robben");
-        $answer4->setIsCorrect(false);
+        $multipleChoiceAnswer4 = new MultipleChoiceAnswer();
+        $multipleChoiceAnswer4->setText("Arjen Robben");
+        $multipleChoiceAnswer4->setIsCorrect(false);
 
-        $question2->addAnswer($answer1);
-        $question2->addAnswer($answer2);
-        $question2->addAnswer($answer3);
-        $question2->addAnswer($answer4);
+        $multipleChoiceQuestion->addAnswer($multipleChoiceAnswer1);
+        $multipleChoiceQuestion->addAnswer($multipleChoiceAnswer2);
+        $multipleChoiceQuestion->addAnswer($multipleChoiceAnswer3);
+        $multipleChoiceQuestion->addAnswer($multipleChoiceAnswer4);
 
-        $exam->addQuestion($question2);
-        $manager->persist($question2);
+        $exam->addQuestion($multipleChoiceQuestion);
+        $exam->addQuestion($singleChoiceQuestion);
+        $manager->persist($multipleChoiceQuestion);
+        $manager->persist($singleChoiceQuestion);
 
         $manager->persist($exam);
 
-        $manager->flush();
-
-
-
-        $exam2 = new Exam();
-        $exam2->addQuestion(clone $question);
-        $exam2->addQuestion(clone $question2);
-        $manager->persist($exam2);
         $manager->flush();
     }
 }
