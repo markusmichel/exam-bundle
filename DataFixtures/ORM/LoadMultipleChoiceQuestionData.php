@@ -6,6 +6,7 @@ namespace MMichel\ExamBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MMichel\ExamBundle\Entity\Exam;
+use MMichel\ExamBundle\Entity\ExamQuestion;
 use MMichel\ExamBundle\Entity\MultipleChoiceAnswer;
 use MMichel\ExamBundle\Entity\MultipleChoiceQuestion;
 use MMichel\ExamBundle\Entity\SingleChoiceAnswer;
@@ -70,10 +71,18 @@ class LoadMultipleChoiceQuestionData implements FixtureInterface
         $multipleChoiceQuestion->addAnswer($multipleChoiceAnswer3);
         $multipleChoiceQuestion->addAnswer($multipleChoiceAnswer4);
 
-        $exam->addQuestion($multipleChoiceQuestion);
-        $exam->addQuestion($singleChoiceQuestion);
-        $manager->persist($multipleChoiceQuestion);
-        $manager->persist($singleChoiceQuestion);
+        $joinTable1 = new ExamQuestion();
+        $joinTable1->setExam($exam);
+        $joinTable1->setQuestion($multipleChoiceQuestion);
+
+        $joinTable2 = new ExamQuestion();
+        $joinTable2->setExam($exam);
+        $joinTable2->setQuestion($singleChoiceQuestion);
+
+        $exam->addQuestion($joinTable1);
+        $exam->addQuestion($joinTable2);
+        $manager->persist($joinTable1);
+        $manager->persist($joinTable2);
 
         $manager->persist($exam);
 
