@@ -3,7 +3,6 @@
 namespace MMichel\ExamBundle\Form\Factory;
 
 
-use MMichel\ExamBundle\Form\Factory\PolymorphCollectionFormFactoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 
