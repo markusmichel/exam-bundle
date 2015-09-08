@@ -1,7 +1,7 @@
 # exam-bundle
 
 Installation
-------------
+====================
 
 Require the bundle in your composer.json file:
 
@@ -37,7 +37,7 @@ twig:
 Usage
 ====================
 
-## Predefined classes
+## Predefined classes <a name="predefined-classes"></a>
 There are a couple of predefined classes which makes it easier to create exams/tests containing simple right or wrong questions. Feel free to reuse and/or extend them.
 
 - [MMichel\ExamBundle\Entity\Question](/Entity/Question.php): Base class for all types of Questions
@@ -100,3 +100,14 @@ public function startExamAction(Exam $examTemplate, Request $request) {
     );
 }
 ```
+
+
+__Gotchas:__
+
+- Don't forget to detatch the exam template to assure that it won't be edited!
+- Make a clone of the template: This will make a completely new instance of the exam, the original won't be touched.
+  This is important because we want to save the exam PLUS the questions as the were when the user answered them.
+  Changes made to the exam later won't effect the result!
+- Downside is that there will be new database rows for every answered questions!
+- If you extend or make your own models, be sure to override the `__clone` methods accordingly.
+  Have a look at the [Predefined Classes](#predefined-classes).
