@@ -12,9 +12,10 @@ class ExamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('questions', 'polymorph_collection', array(
+            ->add('questions', 'collection', array(
                 'allow_add'     => false,
                 'allow_delete'  => false,
+                'type'          => 'exam_question_test',
             ))
         ;
     }

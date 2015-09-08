@@ -6,7 +6,7 @@
         </id>
         <field name="isTemplate" column="is_template" type="boolean" nullable="true" />
 
-        <many-to-many target-entity="Question" field="questions">
+        <many-to-many target-entity="ExamQuestion" field="questions">
             <join-table name="exam_questions">
                 <join-columns>
                     <join-column name="exam_id" referenced-column-name="id" />

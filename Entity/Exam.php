@@ -5,9 +5,7 @@ namespace MMichel\ExamBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use MMichel\ExamBundle\Entity\Question;
 use MMichel\ExamBundle\Model\AbstractQuestionTemplate;
-use MMichel\ExamBundle\Model\QuestionInterface;
 
 /**
  * Exam
@@ -77,10 +75,10 @@ class Exam extends AbstractQuestionTemplate
     /**
      * Add questions
      *
-     * @param Question $question
+     * @param ExamQuestion $question
      * @return Exam
      */
-    public function addQuestion(Question $question)
+    public function addQuestion(ExamQuestion $question)
     {
         $this->questions[] = $question;
 
@@ -90,9 +88,9 @@ class Exam extends AbstractQuestionTemplate
     /**
      * Remove questions
      *
-     * @param Question $question
+     * @param ExamQuestion $question
      */
-    public function removeQuestion(Question $question)
+    public function removeQuestion(ExamQuestion $question)
     {
         $this->questions->removeElement($question);
     }
