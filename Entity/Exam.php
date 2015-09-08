@@ -56,7 +56,7 @@ class Exam extends AbstractQuestionTemplate
             if($this->questions !== null) {
                 $clonedQuestions = new ArrayCollection();
                 foreach($this->questions as $question) {
-                    $clonedQuestions->add(clone $question);
+                    $clonedQuestions[] = clone $question;
                 }
 
                 $this->questions = $clonedQuestions;
