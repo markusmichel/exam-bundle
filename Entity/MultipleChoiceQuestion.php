@@ -41,6 +41,25 @@ class MultipleChoiceQuestion extends Question implements QuestionInterface, Mult
     {
         if($this->id) {
             $this->id = null;
+
+            if($this->answers) {
+                $cloned = new ArrayCollection();
+                $clonedActualAnswers = new ArrayCollection();
+
+                // Make a clone of every answer.
+                // Using an ORM, this will result in a new database row for every clone.
+                foreach($this->answers as $answer) {
+                    $clonedAnswer = clone $answer;
+                    $cloned[] = $clonedAnswer;
+
+                    // Make actualsAnswers elements reference the cloned answers instead of the original ones
+                    if($this->actualAnswers && $this->actualAnswers->contains($answer)) {
+                        $clonedActualAnswers[] = $clonedAnswer;
+                    }
+                }
+                $this->answers = $cloned;
+                $this->actualAnswers = $clonedActualAnswers;
+            }
         }
     }
 

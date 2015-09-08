@@ -51,6 +51,24 @@ class SingleChoiceQuestion extends Question implements SingleChoiceQuestionInter
     {
         if($this->id) {
             $this->id = null;
+
+            // Clone correct + incorrect answers
+            // Reference actual answer if it exists
+            if($this->correctAnswer) {
+                $cloned = clone $this->correctAnswer;
+                if($this->actualAnswer === $this->correctAnswer) $this->actualAnswer = $cloned;
+                $this->correctAnswer = $cloned;
+            }
+
+            if($this->incorrectAnswers) {
+                $clonedAnswers = new ArrayCollection();
+                foreach($this->incorrectAnswers as $answer) {
+                    $cloned = clone $answer;
+                    $clonedAnswers[] = $cloned;
+                    if($this->actualAnswer === $answer) $this->actualAnswer = $cloned;
+                }
+                $this->incorrectAnswers = $clonedAnswers;
+            }
         }
     }
 
