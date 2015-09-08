@@ -59,3 +59,41 @@ There is a predefined FormType `ExamType`, which displays a collection of `Multi
 
 **Note:**
 *Currently, only the `buildForm` method of your custom form types will be used!*
+
+Example usage
+================
+```php
+// AppBundle\Controller\ExampleExamController
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+use MMichel\ExamBundle\Form\ExamType;
+use MMichel\ExamBundle\Entity\Exam;
+
+/**
+ * @Route("/start_exam/{id}", name="exam_start")
+ * @Template()
+ */
+public function startExamAction(Exam $examTemplate, Request $request) {
+    $manager = $this->getDoctrine()->getManager();
+
+    $form = $this->createForm(new ExamType(), $examTemplate);
+
+    $form->handleRequest($request);
+    if($form->isSubmitted() && $form->isValid()) {
+        // Don't forget to detatch the exam template
+        $manager->detach($examTemplate);
+
+        // clone the exam template to make a completely new exam
+        $manager->persist(clone $examTemplate);
+        $manager->flush();
+
+        // ....
+    }
+
+    return array(
+        'form' => $form->createView(),
+    );
+}
+```
