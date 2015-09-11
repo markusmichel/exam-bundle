@@ -1,5 +1,7 @@
 # exam-bundle
 
+__WARNING__: This bundle is currently _work in progress!_
+
 Installation
 ====================
 
